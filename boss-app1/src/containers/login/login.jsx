@@ -1,4 +1,8 @@
 import React,{Component} from 'react'
+import {connect} from 'react-redux' 
+import {login} from '../../redux/action'   
+import {Redirect} from 'react-router-dom'
+
 import Logo from '../../components/logo/logo'
 import {
     NavBar,
@@ -11,7 +15,7 @@ import {
 
 const Item = List.Item;
 
-export default class Register extends Component {
+class Login extends Component {
 
     state = {
         username: '',
@@ -31,10 +35,19 @@ export default class Register extends Component {
 
     // 登录
     login = () => {
-        console.log(this.state)
+        this.props.login(this.state)
     }
     
     render () {
+
+        const vv = this.props.user
+        console.log(vv)
+
+        const {msg, redirectTo} = this.props.user;
+        if(redirectTo){
+            return ( <Redirect to={redirectTo}/> )
+        }
+
         return (
             <div>
                 <NavBar>Boss 直聘</NavBar>
@@ -42,6 +55,7 @@ export default class Register extends Component {
                 {/* 列表 */}
                 <WingBlank>
                     <List>
+                        { msg? <div style={{color:'red'}}>{msg}</div> : ''}
                         <InputItem type="text" placeholder="输入用户名" onChange = { val => {this.handleChange('username', val)} }>用户名：</InputItem>
                         <WhiteSpace/>
                         <InputItem type="password" onChange = { val => {this.handleChange('password', val)} }>密&nbsp;&nbsp;&nbsp;码：</InputItem>
@@ -59,7 +73,11 @@ export default class Register extends Component {
 }
 
 
-
+// 向外暴露连接App组件的包装组件
+export default connect(
+    state => ({user: state.user}),
+    {login}
+)(Login)
 
 
 
