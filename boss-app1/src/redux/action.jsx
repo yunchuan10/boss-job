@@ -1,12 +1,16 @@
 
 import {
     reqLogin,
-    reqRegist
+    reqRegist,
+    reqUpdateUser
 } from '../api'
 
 
 export const auth_succ = data => ({type: 'auth_succ', data})
 export const register_err = data => ({type: 'register_err', data})
+export const receiveUser = data => ({type: 'receive_user', data})
+export const resetUser = data => ({type: 'reset_user', data})
+
 
 
 // 异步action creator(返回一个函数)                 
@@ -55,5 +59,16 @@ export const login = user => {
     }
 }
 
-
+export const updateUser = user => {
+    return async dispatch => {
+        const response = await reqUpdateUser(user);
+        const result = response.data
+        if(result.code==0){
+            dispatch(receiveUser(result.data))
+        }else{
+            dispatch(resetUser(result.msg))
+        }
+        
+    }
+}
 
