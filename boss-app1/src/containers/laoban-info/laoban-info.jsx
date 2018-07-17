@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 
 import {Redirect} from 'react-router-dom'
 import {NavBar, InputItem, TextareaItem, Button} from 'antd-mobile'
-// import HeaderSelector from '../../components/header-selector/header-selector'
+import HeadSelect from '../../components/head-select/head-select'
 
 import {updateUser} from '../../redux/action'
 
@@ -22,6 +22,7 @@ class LaobanInfo extends Component {
 
   // 更新header状态
   setHeader = (header) => {
+      console.log(header)
     this.setState({
       header
     })
@@ -48,7 +49,7 @@ class LaobanInfo extends Component {
     return (
       <div>
         <NavBar>老板信息完善</NavBar>
-        {/* <HeaderSelector setHeader={this.setHeader}/> */}
+        <HeadSelect setHeader={this.setHeader}/>
         <InputItem placeholder='请输入招聘职位' onChange={val => {this.handleChange('post', val)}}>招聘职位:</InputItem>
         <InputItem placeholder='请输入公司名称' onChange={val => {this.handleChange('company', val)}}>公司名称:</InputItem>
         <InputItem placeholder='请输入职位薪资' onChange={val => {this.handleChange('salary', val)}}>职位薪资:</InputItem>
