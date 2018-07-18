@@ -3,11 +3,12 @@
    底部组件
  */
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-
-import {Redirect} from 'react-router-dom'
+import {Redirect, withRouter} from 'react-router-dom'
 import {TabBar} from 'antd-mobile'
 
+
+// 希望在非路由组件中使用路由库的api?
+// withRoute()
 class NavFooter extends Component {
 
     state = {}
@@ -15,15 +16,15 @@ class NavFooter extends Component {
     render () {
 
         const {navList} = this.props
+        const path = this.props.location.pathname
 
-
-
+        console.log(path)
         return (
             <TabBar tabBarPosition='bottom'>
                 {
                     navList.map(  
-                        nav => (
-                            <TabBar.Item title={nav.title} key={nav.title} icon={<img src={'./images/'+nav.icon+'.png'} />}  selectedIcon={<img src={'./images/'+nav.icon+'-selected.png'} />} ></TabBar.Item>
+                        (nav) => (
+                            <TabBar.Item title={nav.title} key={nav.title} icon={{ uri: require(`./images/${nav.icon}.png`) }}  selectedIcon={{ uri: require(`./images/${nav.icon}-selected.png`) }} selected={path===nav.path} ></TabBar.Item>
                         )
                     )
                 }
@@ -33,10 +34,9 @@ class NavFooter extends Component {
     }
 }
 
-export default connect(
-    state => ({user: state.user}),
-    {}
-)(NavFooter)
+// 向外暴露withRouter()包装产生的组件
+// 内部会向组件中传入一些路由组件特有的属性: history/location/math
+export default withRouter(NavFooter)
 
 
 
