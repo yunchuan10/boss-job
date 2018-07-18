@@ -2,7 +2,8 @@
 import {
     reqLogin,
     reqRegist,
-    reqUpdateUser
+    reqUpdateUser,
+    reqUser
 } from '../api'
 
 
@@ -69,6 +70,20 @@ export const updateUser = user => {
             dispatch(resetUser(result.msg))
         }
         
+    }
+}
+
+
+// 实现自动登录               
+export const getUser = user => {
+    return async dispatch => {
+        const resp = await reqUser(user);
+        const result = resp.data;
+        if(result.code==0){
+            dispatch(receiveUser(result.data))
+        }else{
+            dispatch(resetUser(result.msg))
+        }
     }
 }
 
