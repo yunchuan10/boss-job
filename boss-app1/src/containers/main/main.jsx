@@ -83,19 +83,32 @@ class Main extends Component {
         const path = this.props.location.pathname
         const currentNav = navList.find(nav=> nav.path===path) || null // 得到当前的nav, 可能没有
 
+        if(currentNav) {
+            // 决定哪个路由需要隐藏
+            if(user.type==='laoban') {
+              // 隐藏数组的第2个
+              navList[1].hide = true
+            } else {
+              // 隐藏数组的第1个
+              navList[0].hide = true
+            }
+        }
         
         return (
             <div>
                 { currentNav? (<NavBar className='sticky-header'> {currentNav.title} </NavBar>) : '' }
 
-                <Switch>
-                    {
-                        navList.map(nav => <Route key={nav.path} path={nav.path} component={nav.component}/>)
-                    }
-                    <Route path='/laobaninfo' component={LaobanInfo} />
-                    <Route path='/dasheninfo' component={DashenInfo} />
-                    <Route component={NotFound}/>
-                </Switch>
+                
+                    <Switch>
+                        {
+                            
+                            navList.map(nav => <Route key={nav.path} path={nav.path} component={nav.component}/>)
+                        }
+                        <Route path='/laobaninfo' component={LaobanInfo} />
+                        <Route path='/dasheninfo' component={DashenInfo} />
+                        <Route component={NotFound}/>
+                    </Switch>
+                
 
                 { currentNav? <NavFooter navList={navList} />  : '' }
                 

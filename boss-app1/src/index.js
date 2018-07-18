@@ -6,6 +6,8 @@ import Main from './containers/main/main'
 import Register from './containers/register/register'
 import Login from './containers/login/login'
 
+import './assets/css/index.less'
+
 import {BrowserRouter, HashRouter, Route, Switch, Redirect} from 'react-router-dom'
 
 

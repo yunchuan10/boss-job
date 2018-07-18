@@ -5,26 +5,37 @@
 import React, {Component} from 'react'
 import {Redirect, withRouter} from 'react-router-dom'
 import {TabBar} from 'antd-mobile'
+import {PropTypes} from 'prop-types'
+
 
 
 // 希望在非路由组件中使用路由库的api?
 // withRoute()
 class NavFooter extends Component {
 
+    static propTypes = {
+        navList: PropTypes.array.isRequired
+    }
+
     state = {}
 
     render () {
 
-        const {navList} = this.props
+        let {navList} = this.props
         const path = this.props.location.pathname
+        navList = navList.filter(nav => !nav.hide)
 
-        console.log(path)
         return (
             <TabBar tabBarPosition='bottom'>
                 {
                     navList.map(  
                         (nav) => (
-                            <TabBar.Item title={nav.title} key={nav.title} icon={{ uri: require(`./images/${nav.icon}.png`) }}  selectedIcon={{ uri: require(`./images/${nav.icon}-selected.png`) }} selected={path===nav.path} ></TabBar.Item>
+                            <TabBar.Item title={nav.title} key={nav.text} 
+                            icon={{ uri: require(`./images/${nav.icon}.png`) }}  
+                            selectedIcon={{ uri: require(`./images/${nav.icon}-selected.png`) }} 
+                            selected={path===nav.path} 
+                            onPress={ () => this.props.history.replace(nav.path) }
+                            ></TabBar.Item>
                         )
                     )
                 }
