@@ -3,7 +3,8 @@ import {
     reqLogin,
     reqRegist,
     reqUpdateUser,
-    reqUser
+    reqUser,
+    reqUserList
 } from '../api'
 
 
@@ -12,7 +13,8 @@ export const register_err = data => ({type: 'register_err', data})
 export const receiveUser = data => ({type: 'receive_user', data})
 export const resetUser = data => ({type: 'reset_user', data})
 
-
+// 接收用户列表的同步action
+const receiveUserList = (data) => ({type: 'receive_user_list', data})
 
 // 异步action creator(返回一个函数)                 
 export const register = user => {
@@ -86,4 +88,18 @@ export const getUser = user => {
         }
     }
 }
+
+
+// 获取列表信息
+export const getUserList = type => {
+    return async dispatch => {
+        const resp = await reqUserList(type);
+        const result = resp.data;
+        if(result.code==0){
+            dispatch(receiveUserList(result.data))
+        }
+    }
+}
+
+
 

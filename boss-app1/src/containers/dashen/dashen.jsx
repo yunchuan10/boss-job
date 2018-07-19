@@ -4,28 +4,28 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import {Redirect} from 'react-router-dom'
-// import {NavBar, InputItem, TextareaItem, Button} from 'antd-mobile'
-import {updateUser} from '../../redux/action'
+import {getUserList} from '../../redux/action'
+import UserList from '../../components/user-list/user-list'
 
 class Dashen extends Component {
 
-    state = {
-        
+    componentDidMount () {
+        this.props.getUserList('laoban')
     }
 
     render () {
-       
+
+        const {userList} = this.props
 
         return (
-            <div>
-                大神信息
+            <div className="">
+                { userList.length ? <UserList userList={userList}/> : '' }
             </div>
         )
     }
 }
 
 export default connect(
-    state => ({user: state.user}),
-    {}
+    state => ({userList: state.userList}),
+    {getUserList}
 )(Dashen)

@@ -33,6 +33,18 @@ function user(state = userInit, action) {
     }
 }
 
+
+function userList(state = [], action) {
+    switch(action.type){
+        case 'receive_user_list':
+            return action.data;
+            break;
+        default:    
+            return state;
+    }
+}
+
 export default combineReducers({
-    user
+    user,
+    userList
 })
