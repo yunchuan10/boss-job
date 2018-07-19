@@ -1,9 +1,10 @@
 import React,{Component}  from 'react'
 import PropTypes from 'prop-types'
 import {WingBlank, WhiteSpace, Card} from 'antd-mobile'
-import Item from '../../../node_modules/antd-mobile/lib/popover/Item';
+// import Item from '../../../node_modules/antd-mobile/lib/popover/Item';
+import {withRouter} from 'react-router-dom'
 
-export default class UserList extends Component{
+class UserList extends Component{
 
     static propTypes={
         userList: PropTypes.array.isRequired
@@ -46,10 +47,8 @@ export default class UserList extends Component{
                 }
             </WingBlank>
         )
-
     }
-
 }
 
-
+export default withRouter(UserList)
 

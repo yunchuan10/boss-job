@@ -8,6 +8,9 @@ import Dashen from '../dashen/dashen'
 import Laoban from '../laoban/laoban'
 import Message from '../message/message'
 import Personal from '../personal/personal'
+import Chat from '../chat/chat'
+
+
 import NavFooter from '../../components/nav-footer/nav-footer'
 
 import NotFound from '../../components/not-found/not-found'
@@ -106,6 +109,7 @@ class Main extends Component {
                         }
                         <Route path='/laobaninfo' component={LaobanInfo} />
                         <Route path='/dasheninfo' component={DashenInfo} />
+                        <Route path='/chat' component={Chat} />
                         <Route component={NotFound}/>
                     </Switch>
                 

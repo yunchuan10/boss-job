@@ -15,11 +15,11 @@ class Laoban extends Component {
 
     render () {
 
-        const {userList} = this.props
+        const {userList=[]} = this.props
 
         return (
             <div className="">
-                { userList.length ? <UserList userList={userList}/> : '' }
+                <UserList userList={userList}/>  
             </div>
         )
 
