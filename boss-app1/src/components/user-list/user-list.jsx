@@ -13,10 +13,9 @@ class UserList extends Component{
     render () {
         let {userList} = this.props
         userList = userList.filter( user =>  {
-            return (user.header&&user.salary)
+            return (user.header&&user.post)
         })
 
-        console.log(userList)
 
         return (
             <WingBlank style={{marginBottom:60, marginTop:50}}>

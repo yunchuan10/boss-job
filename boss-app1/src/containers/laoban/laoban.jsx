@@ -27,6 +27,6 @@ class Laoban extends Component {
 }
 
 export default connect(
-    state => ({user: state.user}),
+    state => ({userList: state.userList}),
     {getUserList}
 )(Laoban)

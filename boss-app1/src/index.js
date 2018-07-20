@@ -10,7 +10,7 @@ import './assets/css/index.less'
 
 import {BrowserRouter, HashRouter, Route, Switch, Redirect} from 'react-router-dom'
 
-import '../src/test/sockitio_test'
+// import '../src/test/sockitio_test'
 
 ReactDOM.render((
     <Provider store={store}>

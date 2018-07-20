@@ -76,6 +76,7 @@ class Main extends Component {
         }else{  // 如果已经登录到对应用户类型的主页面
             let path = this.props.location.pathname;
             if(path === '/'){
+                console.log(user.type)
                 path = getRedirectTo(user.type, user.header)
                 return <Redirect to={path}/>
             }
@@ -109,7 +110,7 @@ class Main extends Component {
                         }
                         <Route path='/laobaninfo' component={LaobanInfo} />
                         <Route path='/dasheninfo' component={DashenInfo} />
-                        <Route path='/chat' component={Chat} />
+                        <Route path='/chat/:userid' component={Chat} />
                         <Route component={NotFound}/>
                     </Switch>
                 

@@ -37,6 +37,7 @@ function user(state = userInit, action) {
 function userList(state = [], action) {
     switch(action.type){
         case 'receive_user_list':
+        console.log(action.data)
             return action.data;
             break;
         default:    
@@ -44,7 +45,33 @@ function userList(state = [], action) {
     }
 }
 
+
+const initChat = {
+    users: {}, // 所有用户信息的对象  属性名: userid, 属性值是: {username, header}
+    chatMsgs: [], // 当前用户所有相关msg的数组
+    unReadCount: 0 // 总的未读数量
+}
+function chat(state = initChat, action) {
+    switch(action.type){
+        case 'recive_msg_list':
+            const {users, chatMsgs} = action.data
+            return {users, chatMsgs}
+            break;
+
+        case 'recive_msg': // data: chatMsg
+            const {chatMsg} = action.data
+            return {
+                users: state.users,
+                chatMsgs: [...state.chatMsgs, chatMsg],
+                unReadCount: 0
+            }
+        default:    
+            return state;
+    }
+}
+
 export default combineReducers({
     user,
-    userList
+    userList,
+    chat
 })
