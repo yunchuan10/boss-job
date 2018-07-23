@@ -4,6 +4,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
+import QueueAnim from 'rc-queue-anim';
+
 import {sendMsg} from '../../redux/action'
 
 import {NavBar, List, InputItem, Grid, Icon} from 'antd-mobile'
@@ -52,6 +54,15 @@ class Chat extends Component {
 
     }
 
+
+    componentDidMount () {
+        window.scrollTo(0, document.body.scrollHeight)
+    }
+
+    componentDidUpdate () {
+        window.scrollTo(0, document.body.scrollHeight)
+    }
+
     render () {
 
         const {user} = this.props
@@ -69,9 +80,16 @@ class Chat extends Component {
         const targetIcon = targetHeader ? require(`../../assets/images/${targetHeader}.png`) : null
 
         return (
-            <div id='chat-page'>
-                <NavBar>aa</NavBar>
+            <div id='chat-page' style={{ padding: '50px 0' }}>
+                <NavBar 
+                    onLeftClick={this.props.history.goBack}
+                    icon={<Icon type='left'/>} 
+                    className='sticky-header'
+                    >
+                    {users[targetId].username}
+                </NavBar>
                 <List>
+                    <QueueAnim type='left' delay={1}>
                     {
                         msgs.map( msg => {
                             if(msg.to==meId){
@@ -89,6 +107,8 @@ class Chat extends Component {
                             }
                         })
                     }
+                    </QueueAnim>
+                    
 
                 </List>
                 <div className='am-tab-bar'>

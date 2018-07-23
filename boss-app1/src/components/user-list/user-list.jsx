@@ -1,5 +1,6 @@
 import React,{Component}  from 'react'
 import PropTypes from 'prop-types'
+import QueueAnim from 'rc-queue-anim';
 import {WingBlank, WhiteSpace, Card} from 'antd-mobile'
 // import Item from '../../../node_modules/antd-mobile/lib/popover/Item';
 import {withRouter} from 'react-router-dom'
@@ -19,6 +20,7 @@ class UserList extends Component{
 
         return (
             <WingBlank style={{marginBottom:60, marginTop:50}}>
+                <QueueAnim type='scale'>
                 {
                     userList.map(user => (
                         <div key={user._id}>
@@ -44,6 +46,7 @@ class UserList extends Component{
                         </div>
                     ))
                 }
+                </QueueAnim>
             </WingBlank>
         )
     }
